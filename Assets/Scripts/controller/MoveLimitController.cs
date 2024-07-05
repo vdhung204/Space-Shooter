@@ -3,40 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveLimitController : MonoBehaviour
-{
-    private float minX,minY, maxX, maxY;
-    // Start is called before the first frame update
-    void Start()
+{ 
+    public float minX, minY, maxX, maxY;
+    private void Start()
     {
-        Vector3 moveLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
-        minX = - moveLimit.x; 
-        minY = - moveLimit.y; 
-        maxX = moveLimit.x;
-        maxY = moveLimit.y;
+        var moveLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+
+
+        minX = - moveLimit.x + 0.5f ;
+        maxX = moveLimit.x -0.5f;
+
+        minY = - moveLimit.y - 0.5f;
+        maxY = moveLimit.y - 1.7f;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        var playerPos = transform.position;
-        if (playerPos.x < minX)
+        var mainPos = transform.position;
+
+        if (mainPos.x < minX)
         {
-             playerPos.x = minX;
+            mainPos.x = minX;
         }
-        else if (playerPos.x > maxX)
+        else if (mainPos.x > maxX)
         {
-            playerPos.x = maxX;
+            mainPos.x = maxX;
         }
 
-        if (playerPos.y < minY)
+        if (mainPos.y < minY)
         {
-            playerPos.y = minY;
-        }
-        else if (playerPos.y > maxY)
+            mainPos.y = minY;
+        } else if (mainPos.y > maxY)
         {
-            playerPos.y = maxY;
+            mainPos.y = maxY;
         }
 
-        transform.position = playerPos;
+        transform.position = mainPos;
     }
 }
