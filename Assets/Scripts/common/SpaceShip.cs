@@ -10,7 +10,7 @@ public class SpaceShip : MoveBase
     public Transform shootPos;
     public int damage;
     public int levelSpaceShip;
-
+    public GameObject explosion;
     public virtual void Fire()
     {
         SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);  
@@ -26,5 +26,6 @@ public class SpaceShip : MoveBase
     public void OnSpaceShipDie()
     {
         SmartPool.Instance.Despawn(gameObject);
+        SmartPool.Instance.Spawn(explosion, transform.position, transform.rotation);
     }
 }

@@ -12,7 +12,7 @@ public class PlayerController : SpaceShip
         {
             Instance = this;
         }
-        //this.RegisterListener(EventID.EnemyAttack, (sender, param) => TakeDamage((int) param));
+        //this.RegisterListener(EventID.WasHitBulelt, (sender, param) => TakeDamage((int) param));
 
 
     }
@@ -47,16 +47,9 @@ public class PlayerController : SpaceShip
             base.Fire();
         }
     }
-    public override void TakeDamage(int damage)
+    private void SetDamage(int damage)
     {
-        /*this.damage += damage;*/
-        base.TakeDamage(this.damage);
+        this.damage += damage;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "bullet_enemy")
-        {
-            Debug.LogError("player die");
-        }
-    }
+  
 }   

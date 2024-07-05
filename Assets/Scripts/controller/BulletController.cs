@@ -8,6 +8,7 @@ public class BulletController : MoveBase
     private float topLimit, bottomLimit;
     public int damage;
     public int levelBullet;
+    
     private void Start()
     {
         Vector3 moveLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
@@ -48,6 +49,7 @@ public class BulletController : MoveBase
     {
         //Destroy(gameObject);
         SmartPool.Instance.Despawn(gameObject);
+        
     }
     public void SetInforBullet()
     {
@@ -55,13 +57,13 @@ public class BulletController : MoveBase
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Player")
+        var objTakeDame = col.gameObject.GetComponent<SpaceShip>();
+
+        if (objTakeDame != null)
         {
-            this.PostEvent(EventID.EnemyAttack,damage);
-        }    
-        if(col.gameObject.tag == "EnemyShip")
-        {
-            this.PostEvent(EventID.EnemyDie, damage);
-        }
+
+            objTakeDame.TakeDamage(this.damage);
+            DestroyBullet();
+        } 
     }
 }

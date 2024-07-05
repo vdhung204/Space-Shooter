@@ -31,4 +31,7 @@ public enum EventID
     ReviveSuccess,
     EnemyAttack,
     PlayerUpLevel,
+    WasHitBulelt ,
+    EnemyWasHitBullet,
+
 }
