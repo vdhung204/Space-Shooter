@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class PlayerController : SpaceShip
 {
-    public PlayerController Instance { get; private set; }
+    public static PlayerController Instance { get; private set; }
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        //this.RegisterListener(EventID.EnemyAttack, (sender, param) => TakeDamage((int) param));
+
+
     }
     void Update()
     {
@@ -39,6 +45,18 @@ public class PlayerController : SpaceShip
         if (Input.GetMouseButtonDown(0))
         {
             base.Fire();
+        }
+    }
+    public override void TakeDamage(int damage)
+    {
+        /*this.damage += damage;*/
+        base.TakeDamage(this.damage);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "bullet_enemy")
+        {
+            Debug.LogError("player die");
         }
     }
 }   

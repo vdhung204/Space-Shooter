@@ -1,10 +1,11 @@
+using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MoveBase
 {
-    public float topLimit, bottomLimit;
+    private float topLimit, bottomLimit;
     public int damage;
     public int levelBullet;
     private void Start()
@@ -45,10 +46,22 @@ public class BulletController : MoveBase
     }
     public void DestroyBullet()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        SmartPool.Instance.Despawn(gameObject);
     }
     public void SetInforBullet()
     {
 
+    }
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Player")
+        {
+            this.PostEvent(EventID.EnemyAttack,damage);
+        }    
+        if(col.gameObject.tag == "EnemyShip")
+        {
+            this.PostEvent(EventID.EnemyDie, damage);
+        }
     }
 }

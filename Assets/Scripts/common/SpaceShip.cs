@@ -1,3 +1,4 @@
+using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,18 +13,18 @@ public class SpaceShip : MoveBase
 
     public virtual void Fire()
     {
-        Instantiate(bulelt,shootPos.position,shootPos.rotation);    
+        SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);  
     }
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         hp -= damage;
-        if (hp <= 0)
+        if(hp <= 0)
         {
             OnSpaceShipDie();
         }
     }
     public void OnSpaceShipDie()
     {
-        Destroy(gameObject);
+        SmartPool.Instance.Despawn(gameObject);
     }
 }

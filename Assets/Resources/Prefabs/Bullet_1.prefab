@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2253911629886400664, guid: cc02ad8e26d857449a72b3ebe8520ecc, type: 3}
       propertyPath: m_Name
-      value: Bullet1
+      value: Bullet_1
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: cc02ad8e26d857449a72b3ebe8520ecc, type: 3}
       propertyPath: m_TagString
-      value: BulletPlayer
+      value: bullet_player
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: cc02ad8e26d857449a72b3ebe8520ecc, type: 3}
       propertyPath: m_LocalScale.x
@@ -146,3 +146,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  damage: 0
+  levelBullet: 0
