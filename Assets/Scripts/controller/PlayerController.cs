@@ -1,9 +1,12 @@
+using Core.Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : SpaceShip
 {
+    [SerializeField] public int score = 0;
+    [SerializeField] public int live = 3;
     public static PlayerController Instance { get; private set; }
 
     private void Awake()
@@ -12,7 +15,7 @@ public class PlayerController : SpaceShip
         {
             Instance = this;
         }
-        //this.RegisterListener(EventID.WasHitBulelt, (sender, param) => TakeDamage((int) param));
+        this.RegisterListener(EventID.EnemyDie, (sender, param) => PlayerUpScore());
 
 
     }
@@ -47,6 +50,21 @@ public class PlayerController : SpaceShip
             base.Fire();
         }
     }
+    private void PlayerUpScore()
+    {
+        score++;
+        this.PostEvent(EventID.PlayerUpScore);
+    }
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        if(hp<= 0)
+        {
+            live--;
+            SpaceShipDie();
+            this.PostEvent(EventID.PlayerDie);
+        }
+    }
     /*private void SetDamage(int damage)
     {
         this.damage += damage;
@@ -58,6 +76,18 @@ public class PlayerController : SpaceShip
             var temp = col.gameObject.GetComponent<BulletController>();
             TakeDamage(temp.damage);
             temp.DestroyBullet();
+        }
+        
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "enemyShip")
+        {
+            live--;
+            SpaceShipDie();
+            var temp = col.gameObject.GetComponent<EnemyController>();
+            temp.SpaceShipDie();
+            this.PostEvent(EventID.PlayerDie);
         }
     }
 }   

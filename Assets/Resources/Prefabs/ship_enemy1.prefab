@@ -120,7 +120,7 @@ MonoBehaviour:
   bulelt: {fileID: 8047319872047848096, guid: 38accc05fb1e6724985e6d0b25619efe, type: 3}
   shootPos: {fileID: 1812265797828962466}
   levelSpaceShip: 0
-  explosion: {fileID: 0}
+  explosion: {fileID: 5364932345472359320, guid: 8e77b1ba21bcfe24c93a6ccafdf58dbe, type: 3}
 --- !u!50 &2140167190255484929
 Rigidbody2D:
   serializedVersion: 4

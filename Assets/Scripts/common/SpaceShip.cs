@@ -14,15 +14,12 @@ public class SpaceShip : MoveBase
     public virtual void Fire()
     {
         var temp = SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);  
-        //temp.transform.localScale = new Vector3(1.8f,1.8f,1.8f);
+        temp.transform.localScale = new Vector3(1.6f,1.6f,1.6f);
     }
     public virtual void TakeDamage(int damage)
     {
         hp -= damage;
-        if(hp <= 0)
-        {
-            SpaceShipDie();
-        }
+       
     }
     public void SpaceShipDie()
     {

@@ -64,7 +64,15 @@ public class EnemyController : SpaceShip
             return false; 
         }
     }
-
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);   
+        if(hp < 0)
+        {
+            SpaceShipDie();
+            this.PostEvent(EventID.EnemyDie);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.gameObject.tag == "bullet_player")
