@@ -55,7 +55,7 @@ public class BulletController : MoveBase
     {
 
     }
-    private void OnCollisionEnter2D(Collision2D col)
+    /*private void OnCollisionEnter2D(Collision2D col)
     {
         var objTakeDame = col.gameObject.GetComponent<SpaceShip>();
 
@@ -65,5 +65,5 @@ public class BulletController : MoveBase
             objTakeDame.TakeDamage(this.damage);
             DestroyBullet();
         } 
-    }
+    }*/
 }

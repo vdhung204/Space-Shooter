@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8fd93a02b9f769f4da825a248765537c
+guid: 7bd7a7ef41b3e9247b9afdd7cffe0042
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -132,8 +132,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      bigbang1_0: 392093476
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

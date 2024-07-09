@@ -47,9 +47,17 @@ public class PlayerController : SpaceShip
             base.Fire();
         }
     }
-    private void SetDamage(int damage)
+    /*private void SetDamage(int damage)
     {
         this.damage += damage;
+    }*/
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "bullet_enemy")
+        {
+            var temp = col.gameObject.GetComponent<BulletController>();
+            TakeDamage(temp.damage);
+            temp.DestroyBullet();
+        }
     }
-  
 }   

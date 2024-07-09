@@ -7,23 +7,24 @@ public class SpaceShip : MoveBase
 {
     public float hp;
     public GameObject bulelt;
-    public Transform shootPos;
-    public int damage;
+    public Transform shootPos;/*
+    public int damage;*/
     public int levelSpaceShip;
     public GameObject explosion;
     public virtual void Fire()
     {
-        SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);  
+        var temp = SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);  
+        //temp.transform.localScale = new Vector3(1.8f,1.8f,1.8f);
     }
     public virtual void TakeDamage(int damage)
     {
         hp -= damage;
         if(hp <= 0)
         {
-            OnSpaceShipDie();
+            SpaceShipDie();
         }
     }
-    public void OnSpaceShipDie()
+    public void SpaceShipDie()
     {
         SmartPool.Instance.Despawn(gameObject);
         SmartPool.Instance.Spawn(explosion, transform.position, transform.rotation);
