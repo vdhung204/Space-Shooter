@@ -34,7 +34,7 @@ public class SpawnEnenyController : MonoBehaviour
         
         
        var go = SmartPool.Instance.Spawn(enemy, temp, Quaternion.identity);
-        go.transform.localScale = new Vector3(3,3,3);
+        go.transform.localScale = new Vector3(2f,2f,2f);
 
         StartCoroutine(EnemySpawn());
     }

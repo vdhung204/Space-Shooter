@@ -1,4 +1,5 @@
 using Core.Pool;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,7 @@ public class PlayerController : SpaceShip
         if (Input.GetMouseButtonDown(0))
         {
             base.Fire();
+            SoundService.Instance.PlaySound(SoundType.sound_fire_1);
         }
     }
     private void PlayerUpScore()
