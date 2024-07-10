@@ -4,13 +4,9 @@ using System;
 using UniRx;
 using UniRx.Triggers;
 
-public class EventDispatcher : SingletonMonoDontDestroy<EventDispatcher>
+public class EventDispatcher : SingletonMono<EventDispatcher>
 {
     #region Init, main component declare
-
-    public EventDispatcher(string className) : base(className)
-    {
-    }
 
     /// Store all "listener"
     private static Dictionary<EventID, List<Action<Component, object>>> _listenersDict
