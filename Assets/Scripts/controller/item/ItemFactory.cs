@@ -7,7 +7,8 @@ public class ItemFactory : SingletonMono<ItemFactory>
 {
     public GameObject prefabItem;
     public ItemHP prefabItemHP;
-    //public ItemSpeed prefabItemSpeed;
+    public ItemCoin prefabItemCoin;
+    public ItemShield prefabItemShield;
 
     public static List<BaseItem> listItems = new List<BaseItem>();
 
@@ -31,13 +32,22 @@ public class ItemFactory : SingletonMono<ItemFactory>
         switch (index)
         {
             case 0:
+                return CreatItemCoin(pos);
+            case 1:
+                return CreatItemCoin(pos);
+            case 2:
+                return CreatItemCoin(pos);
+            case 3:
+                return CreatItemCoin(pos);
+            case 4:
                 return CreatItemHp(pos);
-           /* case 1:
-                return CreatItemSpeed(pos);
-                *//*case 2:
+            case 5:
+                return CreatItemShield(pos);
+                /*case 2:
                     return createItem<ItemSpeed>(pos);
                 case 3:
                     return createItem<ItemPower>(pos);*/
+
         }
         return null;
     }
@@ -50,11 +60,17 @@ public class ItemFactory : SingletonMono<ItemFactory>
         return item;
     }
 
-    /*private ItemSpeed CreatItemSpeed(Vector3 pos)
+    private ItemCoin CreatItemCoin(Vector3 pos)
     {
-        ItemSpeed item = Instantiate(prefabItemSpeed, pos, prefabItemSpeed.transform.rotation);
+        ItemCoin item = Instantiate(prefabItemCoin, pos, prefabItemCoin.transform.rotation);
         listItems.Add(item);
         return item;
-    }*/
+    }
+    private ItemShield CreatItemShield(Vector3 pos)
+    {
+        ItemShield item = Instantiate(prefabItemShield, pos, prefabItemShield.transform.rotation);
+        listItems.Add(item);
+        return item;
+    }
 
 }

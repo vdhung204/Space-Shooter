@@ -6,7 +6,6 @@ public class ItemEffectHP : MonoBehaviour
 {
     public void AddLive()
     {
-        
         this.gameObject.GetComponent<PlayerController>().AddLive();
         this.PostEvent(EventID.AddHP);
     }
