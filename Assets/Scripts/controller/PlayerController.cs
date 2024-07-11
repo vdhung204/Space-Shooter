@@ -8,6 +8,9 @@ public class PlayerController : SpaceShip
 {
     [SerializeField] public int score = 0;
     [SerializeField] public int live = 3;
+    private float timeshoot;
+    private float TIMESHOOT = 1f;
+
     public static PlayerController Instance { get; private set; }
 
     private void Awake()
@@ -20,36 +23,70 @@ public class PlayerController : SpaceShip
 
 
     }
+    private void Start()
+    {
+        //StartCoroutine(PlayerFire());
+        timeshoot = TIMESHOOT;
+    }
     void Update()
     {
         MovePlayer();
+        timeshoot -= Time.deltaTime;
         Fire();
     }
-    /*public void MoveController()
-    {
-       
-        Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction.z = 0;
-         var newPos = Vector3.Lerp(transform.position, direction,speed);
-        transform.position = newPos;
-
-    }*/
     public void MovePlayer()
     {
-        var x = Input.GetAxis("Horizontal");
-        var y = Input.GetAxis("Vertical");
-        
 
-        Vector3 direction = new Vector3(x, y, 0);
-        MoveBaseController(direction);
+        Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        direction.z = 0;
+        var newPos = Vector3.Lerp(transform.position, direction, speed);
+        transform.position = newPos;
 
+        var moveLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
+
+
+        var minX = -moveLimit.x + 0.5f;
+        var maxX = moveLimit.x - 0.5f;
+
+        var minY = -moveLimit.y - 0.5f;
+        var maxY = moveLimit.y - 1.7f;
+
+        var mainPos = transform.position;
+
+        if (mainPos.x < minX)
+        {
+            mainPos.x = minX;
+        }
+        else if (mainPos.x > maxX)
+        {
+            mainPos.x = maxX;
+        }
+
+        if (mainPos.y < minY)
+        {
+            mainPos.y = minY;
+        } else if (mainPos.y > maxY)
+        {
+            mainPos.y = maxY;
+        }
+
+        transform.position = mainPos;
     }
+    /*IEnumerator PlayerFire()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Fire();
+        SoundService.Instance.PlaySound(SoundType.sound_fire_1);
+        StartCoroutine(PlayerFire());
+    }*/
     public override void Fire()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        if (timeshoot <=0)
         {
             base.Fire();
             SoundService.Instance.PlaySound(SoundType.sound_fire_1);
+            timeshoot = TIMESHOOT;
         }
     }
     private void PlayerUpScore()
@@ -62,15 +99,23 @@ public class PlayerController : SpaceShip
         base.TakeDamage(damage);
         if(hp<= 0)
         {
-            live--;
             SpaceShipDie();
-            this.PostEvent(EventID.PlayerDie);
+            
         }
     }
-    /*private void SetDamage(int damage)
+    public override void SpaceShipDie()
     {
-        this.damage += damage;
-    }*/
+        live--;
+        base.SpaceShipDie();
+        if (live == 0)
+        {
+            this.PostEvent(EventID.GameOver);
+        }
+
+        SoundService.Instance.PlaySound(SoundType.sound_player_die);
+        this.PostEvent(EventID.PlayerDie);
+        
+    }
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "bullet_enemy")
@@ -85,11 +130,9 @@ public class PlayerController : SpaceShip
     {
         if (col.gameObject.tag == "enemyShip")
         {
-            live--;
             SpaceShipDie();
             var temp = col.gameObject.GetComponent<EnemyController>();
             temp.SpaceShipDie();
-            this.PostEvent(EventID.PlayerDie);
         }
     }
 }   

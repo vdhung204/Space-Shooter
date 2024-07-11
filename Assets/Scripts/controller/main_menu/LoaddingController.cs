@@ -1,3 +1,4 @@
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class LoaddingController : MonoBehaviour
 
     private void OnClickPlay()
     {
+        SoundService.Instance.PlaySound(SoundType.sound_click);
         SceneManager.LoadScene(SceneName.MainMenu.ToString());
     }
 }

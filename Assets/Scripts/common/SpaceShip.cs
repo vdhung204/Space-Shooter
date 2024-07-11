@@ -22,9 +22,8 @@ public class SpaceShip : MoveBase
         hp -= damage;
        
     }
-    public void SpaceShipDie()
+    public virtual void SpaceShipDie()
     {
-        SoundService.Instance.PlaySound(SoundType.sound_explosion);
         SmartPool.Instance.Despawn(gameObject);
         SmartPool.Instance.Spawn(explosion, transform.position, transform.rotation);
     }

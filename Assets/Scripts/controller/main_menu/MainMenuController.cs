@@ -1,3 +1,4 @@
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class MainMenuController : MonoBehaviour
 
     private void OnClickBattle()
     {
+        SoundService.Instance.PlaySound(SoundType.sound_click);
         SceneManager.LoadScene(SceneName.GamePlay.ToString());
     }    
 }

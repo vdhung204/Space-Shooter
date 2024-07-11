@@ -1,4 +1,5 @@
 using Core.Pool;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class EnemyController : SpaceShip
 {
     private float timeShoot;
-    private float TIMESHOT = 2f;
+    private float TIMESHOT = 3f;
 
     
     // Start is called before the first frame update
@@ -20,49 +21,39 @@ public class EnemyController : SpaceShip
     void Update()
     {
         timeShoot -= Time.deltaTime;
-        MoveEnemyController();
+        MoveBaseController(-transform.up);
         Fire();
-    }
-    public void MoveEnemyController()
-    {
-        /*var mainPos = PlayerController.Instance.transform.position;
+        CheckLimitPosEnemy();
 
-        var newPos = new Vector3(mainPos.x - transform.position.x ,mainPos.y - transform.position.y ,0f);
-        
-        if (!CheckPosPlayerWithEnemy(mainPos))
-        {*/
-            MoveBaseController( - transform.up);
-
-        /*}
-        else 
-        {
-            if(timeShoot <= 0.8)
-            {
-                Fire();
-                timeShoot = TIMESHOT;
-            }
-              
-        }*/
     }
+    
     public override void Fire()
     {
-        if (timeShoot <= 0.3)
+        if (timeShoot <= 0)
         {
             base.Fire();
+            SoundService.Instance.PlaySound(SoundType.sound_enemy_fire);
             timeShoot = TIMESHOT;
         }
     }
-    public bool CheckPosPlayerWithEnemy(Vector3 direction)
+    private void CheckLimitPosEnemy()
     {
-        var distanPos = Vector3.Distance(transform.position,direction);
+        var pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
 
-        if (distanPos <= 5)
+        var minY = -pos.y -1;
+
+        if (transform.position.y < minY)
         {
-            return true;
-        }else
-        { 
-            return false; 
+            SmartPool.Instance.Despawn(gameObject);
         }
+
+    }
+    public override void SpaceShipDie()
+    {
+        base.SpaceShipDie();
+
+        SoundService.Instance.PlaySound(SoundType.sound_enemy_die);
+
     }
     public override void TakeDamage(int damage)
     {
@@ -81,9 +72,6 @@ public class EnemyController : SpaceShip
             TakeDamage(temp.damage);
             temp.DestroyBullet();
         }
-        if (col.gameObject.tag == "move_limit")
-        {
-           SmartPool.Instance.Despawn(gameObject);
-        }
+        
     }
 }
