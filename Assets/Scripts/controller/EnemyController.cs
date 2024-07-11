@@ -32,7 +32,7 @@ public class EnemyController : SpaceShip
         if (timeShoot <= 0)
         {
             base.Fire();
-            SoundService.Instance.PlaySound(SoundType.sound_enemy_fire);
+            //SoundService.Instance.PlaySound(SoundType.sound_enemy_fire);
             timeShoot = TIMESHOT;
         }
     }
@@ -51,8 +51,9 @@ public class EnemyController : SpaceShip
     public override void SpaceShipDie()
     {
         base.SpaceShipDie();
-
-        SoundService.Instance.PlaySound(SoundType.sound_enemy_die);
+        var x = Random.Range(0, 10);
+        ItemFactory.Instance.Create(x,this.transform.position);
+        //SoundService.Instance.PlaySound(SoundType.sound_enemy_die);
 
     }
     public override void TakeDamage(int damage)

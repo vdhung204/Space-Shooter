@@ -15,7 +15,7 @@ public class LoaddingController : MonoBehaviour
 
     private void OnClickPlay()
     {
-        SoundService.Instance.PlaySound(SoundType.sound_click);
+        //SoundService.Instance.PlaySound(SoundType.sound_click);
         SceneManager.LoadScene(SceneName.MainMenu.ToString());
     }
 }

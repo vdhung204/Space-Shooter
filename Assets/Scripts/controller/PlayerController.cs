@@ -30,6 +30,7 @@ public class PlayerController : SpaceShip
     }
     void Update()
     {
+        ItemFactory.CheckItem(this.transform);
         MovePlayer();
         timeshoot -= Time.deltaTime;
         Fire();
@@ -85,7 +86,7 @@ public class PlayerController : SpaceShip
         if (timeshoot <=0)
         {
             base.Fire();
-            SoundService.Instance.PlaySound(SoundType.sound_fire_1);
+            //SoundService.Instance.PlaySound(SoundType.sound_fire_1);
             timeshoot = TIMESHOOT;
         }
     }
@@ -93,6 +94,10 @@ public class PlayerController : SpaceShip
     {
         score++;
         this.PostEvent(EventID.PlayerUpScore);
+    }
+    public void AddLive()
+    {
+        live++;
     }
     public override void TakeDamage(int damage)
     {
@@ -112,7 +117,7 @@ public class PlayerController : SpaceShip
             this.PostEvent(EventID.GameOver);
         }
 
-        SoundService.Instance.PlaySound(SoundType.sound_player_die);
+        //SoundService.Instance.PlaySound(SoundType.sound_player_die);
         this.PostEvent(EventID.PlayerDie);
         
     }
