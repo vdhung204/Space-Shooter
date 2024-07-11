@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour
         this.RegisterListener(EventID.PlayerDie, (sender, param) =>SpawnPlayer());
         this.RegisterListener(EventID.PlayerUpScore, (sender, param) => ShowScorePlayer());
         this.RegisterListener(EventID.GameOver, (sender, param) => Gameover());
+        this.RegisterListener(EventID.AddHP, (sender, param) => PlayerLiveImg());
+
         StartCoroutine(EnemySpawn());
         SpawnPlayer();
         ShowScorePlayer();
@@ -41,12 +43,12 @@ public class GameController : MonoBehaviour
 
     public void OnEnable()
     {
-        SoundService.Instance.PlayBackgroundMusic(SoundType.sound_bg);
+        //SoundService.Instance.PlayBackgroundMusic(SoundType.sound_bg);
     }
 
     private void OnClickBtnPause()
     {
-        SoundService.Instance.PlaySound(SoundType.sound_click);
+        //SoundService.Instance.PlaySound(SoundType.sound_click);
         Time.timeScale = 0;
         iconPauseButton.sprite = iconPlay;
         popupPause.SetActive(true);
@@ -90,8 +92,13 @@ public class GameController : MonoBehaviour
         {
             return;
         }
+        
         for (int i = 0; i < ships.Length; i++)
-        {
+        {   
+            if(PlayerController.Instance.live > ships.Length)
+            {
+                PlayerController.Instance.live = ships.Length;
+            }
             if (i < PlayerController.Instance.live)
             {
                 ships[i].enabled = true;
@@ -113,7 +120,7 @@ public class GameController : MonoBehaviour
     }
     private void OnClickBtnResume()
     {
-        SoundService.Instance.PlaySound(SoundType.sound_click);
+        //SoundService.Instance.PlaySound(SoundType.sound_click);
 
         Time.timeScale = 1;
         iconPauseButton.sprite = iconPausel;

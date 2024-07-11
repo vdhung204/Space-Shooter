@@ -35,5 +35,6 @@ public enum EventID
     WasHitBulelt ,
     EnemyWasHitBullet,
     GameOver,
+    AddHP,
 
 }
