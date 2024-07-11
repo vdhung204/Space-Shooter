@@ -29,5 +29,5 @@ public abstract class BaseItem : MonoBehaviour
         }
     }
 
-    protected abstract void ItemEffect(GameObject gameObject);
+    protected abstract void ItemEffect(GameObject target);
 }
