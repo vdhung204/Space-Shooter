@@ -10,6 +10,7 @@ public class PlayerController : SpaceShip
     [SerializeField] public int live = 3;
     private float timeshoot;
     private float TIMESHOOT = 1f;
+    public int coins = 0;
 
     public static PlayerController Instance { get; private set; }
 
@@ -98,6 +99,14 @@ public class PlayerController : SpaceShip
     public void AddLive()
     {
         live++;
+    }
+    public void TakeCoin()
+    {
+        coins++;
+    }
+    public void Shield()
+    {
+        
     }
     public override void TakeDamage(int damage)
     {
