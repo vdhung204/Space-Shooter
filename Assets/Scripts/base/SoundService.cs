@@ -10,6 +10,10 @@ namespace Sound
         sound_bg = 1,
         sound_fire_1 = 2,
         sound_explosion = 3,
+        sound_click =4,
+        sound_enemy_fire =5,
+        sound_enemy_die = 6,
+        sound_player_die = 7,
     }
 
     public class SoundService : SingletonMono<SoundService>

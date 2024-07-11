@@ -112,9 +112,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 0d55a9c4887e44e4aa2acb9e0d6c5310, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4385583468840730184}
-    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 0d55a9c4887e44e4aa2acb9e0d6c5310, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1074773923875552821}
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 0d55a9c4887e44e4aa2acb9e0d6c5310, type: 3}
       insertIndex: -1
@@ -131,22 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 0d55a9c4887e44e4aa2acb9e0d6c5310, type: 3}
   m_PrefabInstance: {fileID: 8386359520431424902}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4385583468840730184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502560556361978606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 774550c7bbfd0934bb78687a10c58ebf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minX: 0
-  minY: 0
-  maxX: 0
-  maxY: 0
 --- !u!114 &1074773923875552821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,9 +144,10 @@ MonoBehaviour:
   hp: 5
   bulelt: {fileID: 7360452257617777405, guid: ecc3d6e776948e74987dd4fb34c29024, type: 3}
   shootPos: {fileID: 4272917180360701699}
-  damage: 10
   levelSpaceShip: 0
   explosion: {fileID: 8035061821536892682, guid: 50db101beca5f764a91f03e1d0376cd3, type: 3}
+  score: 0
+  live: 3
 --- !u!61 &3137065088818091318
 BoxCollider2D:
   m_ObjectHideFlags: 0
