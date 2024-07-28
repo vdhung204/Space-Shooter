@@ -1224,6 +1224,7 @@ MonoBehaviour:
   prefabItemHP: {fileID: 4202519225610782089, guid: 891259588c3fef24481e473b71f4b137, type: 3}
   prefabItemCoin: {fileID: 3370060077417084160, guid: 0e155ef0704043744ab2e3c9333b9275, type: 3}
   prefabItemShield: {fileID: 3038405384722848103, guid: 5b82888900d3a8643b49422acc63601e, type: 3}
+  prefabItemUpLevelBullet: {fileID: 4023529534518693980, guid: 2820db425603d0f4db4158b5c29c5790, type: 3}
 --- !u!1 &726064593
 GameObject:
   m_ObjectHideFlags: 0

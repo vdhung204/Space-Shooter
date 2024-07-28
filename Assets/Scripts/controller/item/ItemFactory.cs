@@ -9,7 +9,7 @@ public class ItemFactory : SingletonMono<ItemFactory>
     public ItemHP prefabItemHP;
     public ItemCoin prefabItemCoin;
     public ItemShield prefabItemShield;
-
+    public ItemUpLevelBullet prefabItemUpLevelBullet;
     public static List<BaseItem> listItems = new List<BaseItem>();
 
     public static void CheckItem(Transform target)
@@ -43,10 +43,14 @@ public class ItemFactory : SingletonMono<ItemFactory>
                 return CreatItemHp(pos);
             case 5:
                 return CreatItemShield(pos);
-                /*case 2:
-                    return createItem<ItemSpeed>(pos);
-                case 3:
-                    return createItem<ItemPower>(pos);*/
+            case 6: 
+                return CreatItemUpLevelBullet(pos);
+            case 7:
+                return CreatItemCoin(pos);
+            case 8:
+                return CreatItemCoin(pos);
+            case 9:
+                return CreatItemCoin(pos);
 
         }
         return null;
@@ -69,6 +73,12 @@ public class ItemFactory : SingletonMono<ItemFactory>
     private ItemShield CreatItemShield(Vector3 pos)
     {
         ItemShield item = Instantiate(prefabItemShield, pos, prefabItemShield.transform.rotation);
+        listItems.Add(item);
+        return item;
+    }
+    private ItemUpLevelBullet CreatItemUpLevelBullet(Vector3 pos)
+    {
+        ItemUpLevelBullet item = Instantiate(prefabItemUpLevelBullet, pos, prefabItemUpLevelBullet.transform.rotation);
         listItems.Add(item);
         return item;
     }

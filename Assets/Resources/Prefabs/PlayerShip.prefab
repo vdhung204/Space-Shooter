@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac57c90a8a6124ea71b63e2f43fcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 3
   hp: 5
   bulelt: {fileID: 3212905648084558262, guid: a57d56f50090e424b8c331974ec55abf, type: 3}
   shootPos: {fileID: 4272917180360701699}
@@ -148,6 +148,7 @@ MonoBehaviour:
   explosion: {fileID: 8035061821536892682, guid: 50db101beca5f764a91f03e1d0376cd3, type: 3}
   score: 0
   live: 3
+  bulletPlayer: {fileID: 8313230481761688362, guid: a57d56f50090e424b8c331974ec55abf, type: 3}
   coins: 0
 --- !u!61 &3137065088818091318
 BoxCollider2D:

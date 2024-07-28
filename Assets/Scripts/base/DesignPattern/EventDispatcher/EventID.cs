@@ -36,5 +36,6 @@ public enum EventID
     EnemyWasHitBullet,
     GameOver,
     AddHP,
+    BulletPlayerUpLevel,
 
 }

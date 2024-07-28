@@ -8,13 +8,13 @@ public class SpaceShip : MoveBase
 {
     public float hp;
     public GameObject bulelt;
-    public Transform shootPos;/*
-    public int damage;*/
+    public Transform shootPos;
     public int levelSpaceShip;
     public GameObject explosion;
     public virtual void Fire()
     {
-        var temp = SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);  
+        var temp = SmartPool.Instance.Spawn(bulelt, shootPos.position, shootPos.rotation);
+        temp.GetComponent<BulletController>().InitInforBulelt();
         temp.transform.localScale = new Vector3(1.1f,1.1f,1.1f);
     }
     public virtual void TakeDamage(int damage)

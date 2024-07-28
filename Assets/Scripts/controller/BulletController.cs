@@ -7,8 +7,13 @@ public class BulletController : MoveBase
 {
     private float topLimit, bottomLimit;
     public int damage;
-    public int levelBullet;
-    
+    public int levelBullet = 1;
+    private BulletInfor bulletInfor;
+    void Awake()
+    {
+        bulletInfor = Resources.Load<BulletInfor>("data_csv/BulletInfor");
+
+    }
     private void Start()
     {
         Vector3 moveLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
@@ -39,31 +44,26 @@ public class BulletController : MoveBase
     }
     public void InitInforBulelt()
     {
-
+        var lvlBullet = bulletInfor.GetLevelInforBuleltPlayer(2);
+        SetInforBullet(lvlBullet);
     }
-    public void SetBulletDamage(int damage)
+    public void BulletUpLevel()
     {
-        this.damage = damage;
+        Debug.Log($"Da tang level");
+        this.levelBullet++;
+        var lvl = bulletInfor.GetLevelInforBuleltPlayer(levelBullet);
+        SetInforBullet(lvl);
     }
     public void DestroyBullet()
     {
-        //Destroy(gameObject);
+        
         SmartPool.Instance.Despawn(gameObject);
         
     }
-    public void SetInforBullet()
+    public void SetInforBullet(LevelBullet lvlBullet)
     {
-
+        this.levelBullet = lvlBullet.level;
+        this.damage = lvlBullet.damage;
+        this.speed = lvlBullet.speed;
     }
-    /*private void OnCollisionEnter2D(Collision2D col)
-    {
-        var objTakeDame = col.gameObject.GetComponent<SpaceShip>();
-
-        if (objTakeDame != null)
-        {
-
-            objTakeDame.TakeDamage(this.damage);
-            DestroyBullet();
-        } 
-    }*/
 }

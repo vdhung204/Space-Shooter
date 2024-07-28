@@ -51,7 +51,7 @@ public class EnemyController : SpaceShip
     public override void SpaceShipDie()
     {
         base.SpaceShipDie();
-        var x = Random.Range(0, 10);
+        var x = Random.Range(0, 15);
         ItemFactory.Instance.Create(x,this.transform.position);
         //SoundService.Instance.PlaySound(SoundType.sound_enemy_die);
 

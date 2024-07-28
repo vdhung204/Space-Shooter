@@ -8,6 +8,7 @@ public class PlayerController : SpaceShip
 {
     [SerializeField] public int score = 0;
     [SerializeField] public int live = 3;
+    [SerializeField] private BulletController bulletPlayer;
     private float timeshoot;
     private float TIMESHOOT = 1f;
     public int coins = 0;
@@ -104,9 +105,16 @@ public class PlayerController : SpaceShip
     {
         coins++;
     }
+    public void BulletPlayerUpLevel()
+    {
+        Debug.Log($"Dang tang level");
+        //this.GetComponent<BulletController>().BulletUpLevel();
+        bulletPlayer.GetComponent<BulletController>().BulletUpLevel();
+        
+    }
     public void Shield()
     {
-        
+        Debug.Log($"Bat tu");
     }
     public override void TakeDamage(int damage)
     {

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f90c27c51c90fd408fe1d9d539c91be, type: 3}
   m_Name: CsvDataController
   m_EditorClassIdentifier: 
-  data: []
-  csvDataName: 
+  data:
+  - {fileID: 11400000, guid: 4062d56a9f686d34785380871f809af2, type: 2}
+  csvDataName: BulletInfor
