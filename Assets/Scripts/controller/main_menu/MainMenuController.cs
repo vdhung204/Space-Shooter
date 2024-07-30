@@ -13,6 +13,7 @@ public class MainMenuController : MonoBehaviour
     public Button btnSound;
     public Button btnMusic;
     public Button btnHaptic;
+    public Button btnMenuShop;
     public GameObject popupSetting;
     private bool isPopupOnClick;
     public Image iconSound;
@@ -36,12 +37,18 @@ public class MainMenuController : MonoBehaviour
         btnSound.onClick.AddListener(OnClickBtnSound);
         btnMusic.onClick.AddListener(OnClickBtnMusic);
         btnHaptic.onClick.AddListener(OnClickBtnHaptic);
+        btnMenuShop.onClick.AddListener(OnClickMenuShop);
     }
 
     private void OnClickBattle()
     {
         //SoundService.Instance.PlaySound(SoundType.sound_click);
         SceneManager.LoadScene(SceneName.GamePlay.ToString());
+    }  
+    private void OnClickMenuShop()
+    {
+        //SoundService.Instance.PlaySound(SoundType.sound_click);
+        SceneManager.LoadScene(SceneName.MenuShop.ToString());
     }  
     private void OnClickSetting()
     {
@@ -127,6 +134,8 @@ public class MainMenuController : MonoBehaviour
 
 public enum SceneName
 {
+    Loading,
     MainMenu,
     GamePlay,
+    MenuShop,
 }

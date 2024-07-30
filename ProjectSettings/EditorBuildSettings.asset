@@ -10,8 +10,11 @@ EditorBuildSettings:
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 25b27dd9553cb1a44a4c28bb0acfe1c9
+    guid: ecddebebb18f5b748852bf8e68a5a2c0
   - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 821c86f6dfa8b4a438c2514fd84c83e2
+  - enabled: 1
+    path: Assets/Scenes/MenuShop.unity
+    guid: 604b7c0e54d9d6343ace5d99cfd1dc7a
   m_configObjects: {}
