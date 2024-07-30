@@ -37,10 +37,13 @@ public class PlayerController : SpaceShip
         timeshoot -= Time.deltaTime;
         Fire();
     }
-    public void MovePlayer()
+    private void MovePlayer()
     {
-
-        Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 direction = transform.position;
+        if (Input.GetMouseButton(0))
+        {
+            direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        }
         direction.z = 0;
         var newPos = Vector3.Lerp(transform.position, direction, speed);
         transform.position = newPos;
@@ -75,6 +78,7 @@ public class PlayerController : SpaceShip
 
         transform.position = mainPos;
     }
+
     /*IEnumerator PlayerFire()
     {
         yield return new WaitForSeconds(0.5f);
