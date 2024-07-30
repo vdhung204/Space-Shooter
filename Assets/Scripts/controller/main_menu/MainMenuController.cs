@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class MainMenuController : MonoBehaviour
 {
     public Button btnBattle;
+    public Button btnStage;
     public Button btnSetting;
     public Button btnExitSetting;
     public Button btnSound;
@@ -38,6 +39,7 @@ public class MainMenuController : MonoBehaviour
         btnMusic.onClick.AddListener(OnClickBtnMusic);
         btnHaptic.onClick.AddListener(OnClickBtnHaptic);
         btnMenuShop.onClick.AddListener(OnClickMenuShop);
+        btnStage.onClick.AddListener(OnClickMainMenu);
     }
 
     private void OnClickBattle()
@@ -49,6 +51,10 @@ public class MainMenuController : MonoBehaviour
     {
         //SoundService.Instance.PlaySound(SoundType.sound_click);
         SceneManager.LoadScene(SceneName.MenuShop.ToString());
+    } private void OnClickMainMenu()
+    {
+        //SoundService.Instance.PlaySound(SoundType.sound_click);
+        SceneManager.LoadScene(SceneName.MainMenu.ToString());
     }  
     private void OnClickSetting()
     {

@@ -1195,6 +1195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   btnBattle: {fileID: 2173826899775127118}
+  btnStage: {fileID: 2173826898907518741}
   btnSetting: {fileID: 2173826898916386099}
   btnExitSetting: {fileID: 81118543}
   btnSound: {fileID: 81118542}
