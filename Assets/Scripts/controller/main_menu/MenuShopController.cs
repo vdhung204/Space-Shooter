@@ -16,6 +16,8 @@ public class MenuShopController : MonoBehaviour
     public Image space;
     public Sprite[] spaceShip;
     private int countSpaceShip = 0;
+    public Text txtCoin;
+    public Text txtExp;
 
     private void Start()
     {
@@ -27,7 +29,9 @@ public class MenuShopController : MonoBehaviour
         btnUse.onClick.AddListener(OnClickBtnUse);
         btnNextLeft.onClick.AddListener(OnClickBtnNextLeft);
         btnNextRight.onClick.AddListener(OnClickBtnNextRight);
-            }
+        txtCoin.text = $"{DataAccountPlayer.PlayerCoinData.coinPlayer}";
+        txtExp.text = $"{DataAccountPlayer.PlayerExpData.expPlayer}";
+    }
     private void OnClickBtnStage()
     {
         Debug.Log($"da quay ve main menu");

@@ -99,6 +99,8 @@ public class PlayerController : SpaceShip
     private void PlayerUpScore()
     {
         score++;
+        DataAccountPlayer.PlayerExpData.expPlayer ++;
+        DataAccountPlayer.SaveDataExp();
         this.PostEvent(EventID.PlayerUpScore);
     }
     public void AddLive()
@@ -108,6 +110,8 @@ public class PlayerController : SpaceShip
     public void TakeCoin()
     {
         coins++;
+        DataAccountPlayer.PlayerCoinData.coinPlayer ++;
+        DataAccountPlayer.SaveDataCoin();
     }
     public void BulletPlayerUpLevel()
     {

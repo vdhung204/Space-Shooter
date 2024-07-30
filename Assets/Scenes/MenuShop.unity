@@ -1918,6 +1918,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0189e722b9bce604dba0bac34536aee6, type: 3}
   - {fileID: 21300000, guid: ce8c8af021641964d84c20af55c54318, type: 3}
   - {fileID: 21300000, guid: 5c422f1482449f146aa3da747eaaaaca, type: 3}
+  txtCoin: {fileID: 1524376802}
+  txtExp: {fileID: 553365748}
 --- !u!4 &1991802229
 Transform:
   m_ObjectHideFlags: 0

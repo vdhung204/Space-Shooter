@@ -1212,9 +1212,8 @@ MonoBehaviour:
   iconHaptic: {fileID: 81118536}
   iconHapticOn: {fileID: 21300000, guid: f6de2a7823f2e4282b6a118ee77c977e, type: 3}
   iconHapticOff: {fileID: 21300000, guid: e89d44b461de14643a25447189c6d69a, type: 3}
-  isPopupSound: 1
-  isPopupMusic: 1
-  isPopupHaptic: 1
+  txtCoin: {fileID: 1524376802}
+  txtExp: {fileID: 553365748}
 --- !u!4 &904301210
 Transform:
   m_ObjectHideFlags: 0
@@ -1379,7 +1378,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '6000
+  m_Text: '
 
 '
 --- !u!222 &1524376803

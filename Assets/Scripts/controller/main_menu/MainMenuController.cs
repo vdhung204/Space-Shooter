@@ -26,9 +26,11 @@ public class MainMenuController : MonoBehaviour
     public Image iconHaptic;
     public Sprite iconHapticOn;
     public Sprite iconHapticOff;
-    public bool isPopupSound = true;
-    public bool isPopupMusic = true;
-    public bool isPopupHaptic = true;
+    public Text txtCoin;
+    public Text txtExp;
+    private bool isPopupSound = true;
+    private bool isPopupMusic = true;
+    private bool isPopupHaptic = true;
 
     void Start()
     {
@@ -40,6 +42,8 @@ public class MainMenuController : MonoBehaviour
         btnHaptic.onClick.AddListener(OnClickBtnHaptic);
         btnMenuShop.onClick.AddListener(OnClickMenuShop);
         btnStage.onClick.AddListener(OnClickMainMenu);
+        txtCoin.text = $"{DataAccountPlayer.PlayerCoinData.coinPlayer}";
+        txtExp.text = $"{DataAccountPlayer.PlayerExpData.expPlayer}";
     }
 
     private void OnClickBattle()
