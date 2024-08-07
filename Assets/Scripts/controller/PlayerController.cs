@@ -8,10 +8,11 @@ public class PlayerController : SpaceShip
 {
     [SerializeField] public int score = 0;
     [SerializeField] public int live = 3;
-    [SerializeField] private BulletController bulletPlayer;
     private float timeshoot;
     private float TIMESHOOT = 1f;
     public int coins = 0;
+
+    public static int bulletLevel = 1;
 
     public static PlayerController Instance { get; private set; }
 
@@ -92,15 +93,21 @@ public class PlayerController : SpaceShip
         if (timeshoot <=0)
         {
             base.Fire();
-            //SoundService.Instance.PlaySound(SoundType.sound_fire_1);
+            SoundService.Instance.PlaySound(SoundType.sound_fire_1);
             timeshoot = TIMESHOOT;
         }
     }
     private void PlayerUpScore()
     {
         score++;
-        DataAccountPlayer.PlayerExpData.expPlayer ++;
-        DataAccountPlayer.SaveDataExp();
+
+        /*if (score > 0 && score % 10 == 0)
+        {
+            this.PostEvent(EventID.SkipBg);
+        }*/
+
+        DataAccountPlayer.PlayerInfor.expPlayer ++;
+        DataAccountPlayer.SaveDataPlayerInfor();
         this.PostEvent(EventID.PlayerUpScore);
     }
     public void AddLive()
@@ -110,14 +117,12 @@ public class PlayerController : SpaceShip
     public void TakeCoin()
     {
         coins++;
-        DataAccountPlayer.PlayerCoinData.coinPlayer ++;
-        DataAccountPlayer.SaveDataCoin();
+        DataAccountPlayer.PlayerInfor.coinPlayer ++;
+        DataAccountPlayer.SaveDataPlayerInfor();
     }
     public void BulletPlayerUpLevel()
     {
-        Debug.Log($"Dang tang level");
-        //this.GetComponent<BulletController>().BulletUpLevel();
-        bulletPlayer.GetComponent<BulletController>().BulletUpLevel();
+        bulletLevel ++;
         
     }
     public void Shield()
@@ -142,7 +147,7 @@ public class PlayerController : SpaceShip
             this.PostEvent(EventID.GameOver);
         }
 
-        //SoundService.Instance.PlaySound(SoundType.sound_player_die);
+        SoundService.Instance.PlaySound(SoundType.sound_player_die);
         this.PostEvent(EventID.PlayerDie);
         
     }
@@ -154,15 +159,16 @@ public class PlayerController : SpaceShip
             TakeDamage(temp.damage);
             temp.DestroyBullet();
         }
-        
+
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
+        
         if (col.gameObject.tag == "enemyShip")
-        {
-            SpaceShipDie();
-            var temp = col.gameObject.GetComponent<EnemyController>();
-            temp.SpaceShipDie();
-        }
+                {
+                    SpaceShipDie();
+                    var temp = col.gameObject.GetComponent<EnemyController>();
+                    temp.SpaceShipDie();
+                }
     }
 }   

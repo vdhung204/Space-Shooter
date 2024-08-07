@@ -7,6 +7,6 @@ public class ItemUpLevelBullet : BaseItem
     protected override void ItemEffect(GameObject target)
     {
         target.AddComponent<ItemEffectUpLevelBullet>().BulletPlayerUpLevel();
-        //this.PostEvent(EventID.AddHP);
+
     }
 }

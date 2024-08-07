@@ -7,11 +7,11 @@ public class BulletController : MoveBase
 {
     private float topLimit, bottomLimit;
     public int damage;
-    public int levelBullet = 1;
-    private BulletInfor bulletInfor;
+    public int levelBullet;
+ 
     void Awake()
     {
-        bulletInfor = Resources.Load<BulletInfor>("data_csv/BulletInfor");
+        
 
     }
     private void Start()
@@ -44,21 +44,31 @@ public class BulletController : MoveBase
     }
     public void InitInforBulelt()
     {
-        var lvlBullet = bulletInfor.GetLevelInforBuleltPlayer(2);
+        var lvlBullet = GetLevelInforBuleltPlayer(PlayerController.bulletLevel);
         SetInforBullet(lvlBullet);
     }
-    public void BulletUpLevel()
+   
+
+    public LevelBullet GetLevelInforBuleltPlayer(int level)
     {
-        Debug.Log($"Da tang level");
-        this.levelBullet++;
-        var lvl = bulletInfor.GetLevelInforBuleltPlayer(levelBullet);
-        SetInforBullet(lvl);
+        var bulletInfor = Resources.Load<BulletInfor>("data_csv/BulletInfor");
+
+        if (level > bulletInfor.levelBullets[bulletInfor.levelBullets.Length - 1].level)
+        {
+            return bulletInfor.levelBullets[bulletInfor.levelBullets.Length - 1];
+        }
+
+        foreach (LevelBullet lvl in bulletInfor.levelBullets)
+        {
+            if (lvl.level == level)
+                return lvl;
+        }
+
+        return bulletInfor.levelBullets[0];
     }
     public void DestroyBullet()
     {
-        
         SmartPool.Instance.Despawn(gameObject);
-        
     }
     public void SetInforBullet(LevelBullet lvlBullet)
     {

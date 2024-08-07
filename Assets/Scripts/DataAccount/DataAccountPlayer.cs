@@ -5,56 +5,60 @@ using UnityEngine;
 
 public static class DataAccountPlayer
 {
-    private static PlayerInfor _playerExp;
-    private static PlayerInfor _playerCoin;
+    private static PlayerInfor _playerInfor;
+    private static PlayerSetting _playerSetting;
 
-    public static PlayerInfor PlayerExpData
+    public static PlayerInfor PlayerInfor
     {
         get
         {
-            if (_playerExp != null)
-                return _playerExp;
+            if (_playerInfor != null)
+                return _playerInfor;
 
-            var local = PlayerPrefs.GetString(DataAccountPlayerConstans.EXP_PLAYER_DATA);
+            var local = PlayerPrefs.GetString(DataAccountPlayerConstans.PLAYER_INFOR);
+
             if (!string.IsNullOrEmpty(local))
             {
-                _playerExp = JsonConvert.DeserializeObject<PlayerInfor>(local);
+                _playerInfor = JsonConvert.DeserializeObject<PlayerInfor>(local);
             }
             else
             {
-                _playerExp = new PlayerInfor();
+                _playerInfor = new PlayerInfor();
             }
 
-            return _playerExp;
+            return _playerInfor;
         }
     }
-    public static PlayerInfor PlayerCoinData
+    public static PlayerSetting PlayerSetting
     {
         get
         {
-            if (_playerCoin != null)
-                return _playerCoin;
+            if (_playerSetting != null)
+                return _playerSetting;
 
-            var local = PlayerPrefs.GetString(DataAccountPlayerConstans.COIN_PLAYER_DATA);
+            var local = PlayerPrefs.GetString(DataAccountPlayerConstans.PLAYER_SETTING);
+
             if (!string.IsNullOrEmpty(local))
             {
-                _playerCoin = JsonConvert.DeserializeObject<PlayerInfor>(local);
+                _playerSetting = JsonConvert.DeserializeObject<PlayerSetting>(local);
             }
             else
             {
-                _playerCoin = new PlayerInfor();
+                _playerSetting = new PlayerSetting();
             }
 
-            return _playerCoin;
+            return _playerSetting;
         }
     }
+  
 
-    public static void SaveDataExp()
+    public static void SaveDataPlayerInfor()
     {
-        PlayerPrefs.SetString(DataAccountPlayerConstans.EXP_PLAYER_DATA, JsonConvert.SerializeObject(_playerExp));
+        PlayerPrefs.SetString(DataAccountPlayerConstans.PLAYER_INFOR, JsonConvert.SerializeObject(_playerInfor));
     }
-    public static void SaveDataCoin()
+    public static void SaveDataPlayerSetting()
     {
-        PlayerPrefs.SetString(DataAccountPlayerConstans.COIN_PLAYER_DATA, JsonConvert.SerializeObject(_playerCoin));
+        PlayerPrefs.SetString(DataAccountPlayerConstans.PLAYER_SETTING, JsonConvert.SerializeObject(_playerSetting));
     }
+    
 }

@@ -29,8 +29,8 @@ public class MenuShopController : MonoBehaviour
         btnUse.onClick.AddListener(OnClickBtnUse);
         btnNextLeft.onClick.AddListener(OnClickBtnNextLeft);
         btnNextRight.onClick.AddListener(OnClickBtnNextRight);
-        txtCoin.text = $"{DataAccountPlayer.PlayerCoinData.coinPlayer}";
-        txtExp.text = $"{DataAccountPlayer.PlayerExpData.expPlayer}";
+        txtCoin.text = $"{DataAccountPlayer.PlayerInfor.coinPlayer}";
+        txtExp.text = $"{DataAccountPlayer.PlayerInfor.expPlayer}";
     }
     private void OnClickBtnStage()
     {
@@ -73,7 +73,9 @@ public class MenuShopController : MonoBehaviour
             {
                 countSpaceShip++;
                 space.sprite = spaceShip[countSpaceShip];
-            }
+                space.sprite = Resources.Load<Sprite>($"ship_image/space_{countSpaceShip}");
+
+        }
         //}
     }
     /*private bool CheckBtnNextIsOn()

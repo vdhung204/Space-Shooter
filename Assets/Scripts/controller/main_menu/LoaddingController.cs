@@ -7,15 +7,26 @@ using UnityEngine.UI;
 
 public class LoaddingController : MonoBehaviour
 {
-    public Button btnPlay;
+    public Slider slider;
     void Start()
     {
-        btnPlay.onClick.AddListener(OnClickPlay);
+        StartCoroutine(LoadSceneMain());
     }
 
     private void OnClickPlay()
     {
         //SoundService.Instance.PlaySound(SoundType.sound_click);
         SceneManager.LoadScene(SceneName.MainMenu.ToString());
+    }
+    IEnumerator LoadSceneMain()
+    {
+        AsyncOperation loadOperation = SceneManager.LoadSceneAsync(SceneName.MainMenu.ToString());
+
+        while (!loadOperation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(loadOperation.progress / 0.9f);
+            slider.value = progressValue;
+            yield return null;
+        }
     }
 }

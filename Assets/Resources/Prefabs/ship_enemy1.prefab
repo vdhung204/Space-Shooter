@@ -118,7 +118,8 @@ MonoBehaviour:
   speed: 3
   hp: 5
   bulelt: {fileID: 8047319872047848096, guid: 38accc05fb1e6724985e6d0b25619efe, type: 3}
-  shootPos: {fileID: 1812265797828962466}
+  shootPos:
+  - {fileID: 1812265797828962466}
   levelSpaceShip: 0
   explosion: {fileID: 5364932345472359320, guid: 8e77b1ba21bcfe24c93a6ccafdf58dbe, type: 3}
 --- !u!50 &2140167190255484929
@@ -155,7 +156,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4603407427005300622}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

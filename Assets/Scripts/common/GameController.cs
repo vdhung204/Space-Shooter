@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private GameObject shipPlayer;
+    [SerializeField] private GameObject[] shipPlayer;
     [SerializeField] private Text scoretxt;
     [SerializeField] private Image[] ships;
     public Sprite iconPausel;
@@ -24,7 +24,20 @@ public class GameController : MonoBehaviour
     public GameObject enemy;
 
     private bool _isGameover = false;
-    
+
+    public int wave = 1;
+    public int timeSpawn;
+    public int countEnemy;
+    public int countEnemyWave = 0;
+    private WaveEnemy waveSpawn;
+
+    private int currentWave = 1;
+
+    private void Awake()
+    {
+        waveSpawn = Resources.Load<WaveEnemy>("data_csv/WaveEnemy");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,48 +48,120 @@ public class GameController : MonoBehaviour
         this.RegisterListener(EventID.PlayerUpScore, (sender, param) => ShowScorePlayer());
         this.RegisterListener(EventID.GameOver, (sender, param) => Gameover());
         this.RegisterListener(EventID.AddHP, (sender, param) => PlayerLiveImg());
+        
 
-        StartCoroutine(EnemySpawn());
+        CheckToSpawnWave();
         SpawnPlayer();
         ShowScorePlayer();
         PlayerLiveImg();
+       
     }
-
+    
+   
     public void OnEnable()
     {
-        //SoundService.Instance.PlayBackgroundMusic(SoundType.sound_bg);
+        SoundService.Instance.PlayBackgroundMusic(SoundType.sound_bg);
     }
 
     private void OnClickBtnPause()
     {
-        //SoundService.Instance.PlaySound(SoundType.sound_click);
+        SoundService.Instance.PlaySound(SoundType.sound_click);
         Time.timeScale = 0;
         iconPauseButton.sprite = iconPlay;
         popupPause.SetActive(true);
     }
+    
     private void SpawnPlayer()
     {
         if (!_isGameover)
         {
             PlayerLiveImg();
-            var posPlayer = new Vector3(0f, -4.8f, 0f);
-            var ship = SmartPool.Instance.Spawn(shipPlayer, posPlayer, Quaternion.identity);
-            ship.transform.localScale = new Vector3(3.3f, 3.3f, 3.3f);
+
+            var playerShipIndex = DataAccountPlayer.PlayerInfor.shipPlayerUse;
+            var shipUser = shipPlayer[0];
+
+            switch (playerShipIndex)
+            {
+                case 1:
+                    shipUser = shipPlayer[0];
+                    break;
+                case 2:
+                    shipUser = shipPlayer[1];
+                    break;
+                default:
+                    shipUser = shipPlayer[0];
+                    break;
+
+            } 
+
+            var posPlayer = new Vector3(0f, -2.8f, 0f);
+            SmartPool.Instance.Spawn(shipUser, posPlayer, Quaternion.identity);
+            
         }
     }
-    IEnumerator EnemySpawn()
+
+    private void CheckToSpawnWave()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 5f));
+        var waveEnemies = waveSpawn.waveEnemy;
+
+        for (int i = 0; i < waveEnemies.Length; i++)
+        {
+            if (currentWave == waveEnemies[i].wave)
+            {
+                StartCoroutine (SpawnWave(waveEnemies[i].delay_time));
+
+                return;
+            }
+
+        }
+    }
+
+
+    private IEnumerator SpawnWave(int delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        StartCoroutine(SpawnEnemy());
+    }
+    IEnumerator SpawnEnemy()
+    {
+        yield return new WaitForSeconds(1.5f);
         var pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         var minX = -pos.x;
-        var maxX =   pos.x;
+        var maxX = pos.x;
         var maxY = pos.y + 1;
         var temp = UnityEngine.Random.Range(minX, maxX);
 
-        var posEnemy = new Vector3(temp,maxY,0f);
+        var posEnemy = new Vector3(temp, maxY, 0f);
         var go = SmartPool.Instance.Spawn(enemy, posEnemy, Quaternion.identity);
         go.transform.localScale = new Vector3(2f, 2f, 2f);
-        StartCoroutine(EnemySpawn());   
+
+        countEnemyWave++;
+        countEnemy = waveSpawn.GetWaveInfor(currentWave).spawn_enemy;
+
+        if (countEnemyWave == countEnemy)
+        {
+            currentWave++;
+
+            if (currentWave == waveSpawn.waveEnemy.Length)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                CheckToSpawnWave();
+                countEnemyWave = 0;
+                 var timeDelay = waveSpawn.GetWaveInfor(currentWave).delay_time;
+                this.PostEvent(EventID.WaveEnd, timeDelay);
+
+            }
+            
+        }
+        else
+        {
+            StartCoroutine(SpawnEnemy());
+        }
+
     }
 
     private void ShowScorePlayer()
@@ -112,16 +197,18 @@ public class GameController : MonoBehaviour
     }
     private void OnClickBtnExit()
     {
+        SoundService.Instance.PlaySound(SoundType.sound_click);
         BackToMainMenu();
     }
     private void BackToMainMenu()
     {
         SceneManager.LoadScene(SceneName.MainMenu.ToString());
+        _isGameover = false;
         Time.timeScale = 1;
     }
     private void OnClickBtnResume()
     {
-        //SoundService.Instance.PlaySound(SoundType.sound_click);
+        SoundService.Instance.PlaySound(SoundType.sound_click);
 
         Time.timeScale = 1;
         iconPauseButton.sprite = iconPausel;
@@ -129,7 +216,6 @@ public class GameController : MonoBehaviour
     }
     private void Gameover()
     {
-        
             popupGameover.SetActive(true);
             Time.timeScale = 0;
             _isGameover = true;

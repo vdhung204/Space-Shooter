@@ -37,5 +37,7 @@ public enum EventID
     GameOver,
     AddHP,
     BulletPlayerUpLevel,
+    SkipBg,
+    WaveEnd,
 
 }

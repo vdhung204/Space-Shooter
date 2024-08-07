@@ -1127,8 +1127,6 @@ GameObject:
   m_Component:
   - component: {fileID: 702288601}
   - component: {fileID: 702288600}
-  - component: {fileID: 702288602}
-  - component: {fileID: 702288603}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1148,7 +1146,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94825f6ab75e55148afd9865718040a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipPlayer: {fileID: 1502560556361978606, guid: c8744f7522647db4fb4cda4f149b2577, type: 3}
+  shipPlayer:
+  - {fileID: 1502560556361978606, guid: c8744f7522647db4fb4cda4f149b2577, type: 3}
+  - {fileID: 6338588408908439721, guid: efbe41998a436ca44a6ad98d04404a01, type: 3}
+  - {fileID: 1502560556361978606, guid: c8744f7522647db4fb4cda4f149b2577, type: 3}
   scoretxt: {fileID: 467653307}
   ships:
   - {fileID: 726064595}
@@ -1163,6 +1164,10 @@ MonoBehaviour:
   btnExit: {fileID: 2091022336}
   btnResume: {fileID: 676922233}
   enemy: {fileID: 4603407427005300622, guid: a758d37afbbbb8e48b537ed5ca6bc95c, type: 3}
+  wave: 1
+  timeSpawn: 0
+  countEnemy: 0
+  countEnemyWave: 0
 --- !u!4 &702288601
 Transform:
   m_ObjectHideFlags: 0
@@ -1178,53 +1183,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &702288602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702288599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d0a809249bf47d9b47c36bcc4dda483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
---- !u!114 &702288603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702288599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c34964ceb134d46936fb78665d9697, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  prefabItem: {fileID: 0}
-  prefabItemHP: {fileID: 4202519225610782089, guid: 891259588c3fef24481e473b71f4b137, type: 3}
-  prefabItemCoin: {fileID: 3370060077417084160, guid: 0e155ef0704043744ab2e3c9333b9275, type: 3}
-  prefabItemShield: {fileID: 3038405384722848103, guid: 5b82888900d3a8643b49422acc63601e, type: 3}
-  prefabItemUpLevelBullet: {fileID: 4023529534518693980, guid: 2820db425603d0f4db4158b5c29c5790, type: 3}
 --- !u!1 &726064593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,6 +2446,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 2124397701}
+  - {fileID: 359971751}
   - {fileID: 2117763264}
   - {fileID: 702288601}
-  - {fileID: 359971751}
