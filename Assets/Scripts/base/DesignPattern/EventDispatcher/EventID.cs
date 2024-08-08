@@ -36,8 +36,8 @@ public enum EventID
     EnemyWasHitBullet,
     GameOver,
     AddHP,
-    BulletPlayerUpLevel,
     SkipBg,
     WaveEnd,
-
+    UpdateCoins,
+    Victory,
 }

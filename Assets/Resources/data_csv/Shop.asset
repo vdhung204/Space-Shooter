@@ -15,11 +15,16 @@ MonoBehaviour:
   shopInfors:
   - id: 1
     image: space_1
+    price: 0
   - id: 2
     image: space_2
+    price: 10
   - id: 3
     image: space_3
+    price: 20
   - id: 4
     image: space_4
+    price: 30
   - id: 5
     image: space_5
+    price: 40

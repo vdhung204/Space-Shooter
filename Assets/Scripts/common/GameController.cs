@@ -17,13 +17,13 @@ public class GameController : MonoBehaviour
     public Sprite iconPlay;
     public Image iconPauseButton;
     public GameObject popupPause;
-    public GameObject popupGameover;
+    public GameObject popupEndGame;
     public Button btnPause;
     public Button btnExit;
     public Button btnResume;
     public GameObject enemy;
 
-    private bool _isGameover = false;
+    //private static bool _isGameover = false;
 
     public int wave = 1;
     public int timeSpawn;
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
         btnResume.onClick.AddListener(OnClickBtnResume);
         this.RegisterListener(EventID.PlayerDie, (sender, param) =>SpawnPlayer());
         this.RegisterListener(EventID.PlayerUpScore, (sender, param) => ShowScorePlayer());
-        this.RegisterListener(EventID.GameOver, (sender, param) => Gameover());
+        this.RegisterListener(EventID.GameOver, (sender, param) => EndGame());
         this.RegisterListener(EventID.AddHP, (sender, param) => PlayerLiveImg());
         
 
@@ -70,11 +70,18 @@ public class GameController : MonoBehaviour
         iconPauseButton.sprite = iconPlay;
         popupPause.SetActive(true);
     }
-    
+    private IEnumerator DelaySpawnPlayer()
+    {
+        yield return new WaitForSeconds(3f);
+
+        //StartCoroutine(SpawnEnemy());
+    }
+
     private void SpawnPlayer()
     {
-        if (!_isGameover)
+        if (PlayerController.live > 0)
         {
+            StartCoroutine(DelaySpawnPlayer());
             PlayerLiveImg();
 
             var playerShipIndex = DataAccountPlayer.PlayerInfor.shipPlayerUse;
@@ -145,7 +152,8 @@ public class GameController : MonoBehaviour
 
             if (currentWave == waveSpawn.waveEnemy.Length)
             {
-                Time.timeScale = 0;
+                EndGame();
+                this.PostEvent(EventID.Victory);
             }
             else
             {
@@ -181,11 +189,11 @@ public class GameController : MonoBehaviour
         
         for (int i = 0; i < ships.Length; i++)
         {   
-            if(PlayerController.Instance.live > ships.Length)
+            if(PlayerController.live > ships.Length)
             {
-                PlayerController.Instance.live = ships.Length;
+                PlayerController.live = ships.Length;
             }
-            if (i < PlayerController.Instance.live)
+            if (i < PlayerController.live)
             {
                 ships[i].enabled = true;
             }
@@ -198,13 +206,11 @@ public class GameController : MonoBehaviour
     private void OnClickBtnExit()
     {
         SoundService.Instance.PlaySound(SoundType.sound_click);
-        BackToMainMenu();
+        EndGame();
     }
     private void BackToMainMenu()
     {
         SceneManager.LoadScene(SceneName.MainMenu.ToString());
-        _isGameover = false;
-        Time.timeScale = 1;
     }
     private void OnClickBtnResume()
     {
@@ -214,12 +220,10 @@ public class GameController : MonoBehaviour
         iconPauseButton.sprite = iconPausel;
         popupPause.SetActive(false);
     }
-    private void Gameover()
+    private void EndGame()
     {
-            popupGameover.SetActive(true);
+            popupEndGame.SetActive(true);
             Time.timeScale = 0;
-            _isGameover = true;
-            BackToMainMenu();
         
     }
 }

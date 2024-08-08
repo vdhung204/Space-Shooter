@@ -21,6 +21,7 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
+        this.RegisterListener(EventID.UpdateCoins, (sender, param)=> UpdateCoins() );
         btnBattle.onClick.AddListener(OnClickBattle);
         btnSetting.onClick.AddListener(OnClickSetting);
         
@@ -28,6 +29,7 @@ public class MainMenuController : MonoBehaviour
         btnShop.onClick.AddListener(OnClickMenuShop);
         txtCoin.text = $"{DataAccountPlayer.PlayerInfor.coinPlayer}";
         txtExp.text = $"{DataAccountPlayer.PlayerInfor.expPlayer}";
+        Time.timeScale = 1f ;
     }
 
     
@@ -50,6 +52,10 @@ public class MainMenuController : MonoBehaviour
     {
         SoundService.Instance.PlaySound(SoundType.sound_click);
         popupSetting.SetActive(true);
+    }   
+    private void UpdateCoins()
+    {
+        txtCoin.text = $"{DataAccountPlayer.PlayerInfor.coinPlayer}";
     }   
    
 }

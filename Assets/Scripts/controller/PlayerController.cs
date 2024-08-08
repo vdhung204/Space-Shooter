@@ -7,29 +7,31 @@ using UnityEngine;
 public class PlayerController : SpaceShip
 {
     [SerializeField] public int score = 0;
-    [SerializeField] public int live = 3;
+    [SerializeField] public static int live = 3;
     private float timeshoot;
     private float TIMESHOOT = 1f;
     public int coins = 0;
 
+    private BoxCollider2D box;
     public static int bulletLevel = 1;
 
     public static PlayerController Instance { get; private set; }
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
         }
         this.RegisterListener(EventID.EnemyDie, (sender, param) => PlayerUpScore());
-
+        box = GetComponent<BoxCollider2D>();
 
     }
     private void Start()
     {
         //StartCoroutine(PlayerFire());
         timeshoot = TIMESHOOT;
+        Debug.Log(live);
     }
     void Update()
     {
@@ -127,7 +129,13 @@ public class PlayerController : SpaceShip
     }
     public void Shield()
     {
+        //box.gameObject.SetActive(false);
         Debug.Log($"Bat tu");
+    }
+    private IEnumerator BackToTakeDamage()
+    {
+        yield return new WaitForSeconds(5f);
+        box.gameObject.SetActive(true);
     }
     public override void TakeDamage(int damage)
     {

@@ -9,11 +9,6 @@ public class BulletController : MoveBase
     public int damage;
     public int levelBullet;
  
-    void Awake()
-    {
-        
-
-    }
     private void Start()
     {
         Vector3 moveLimit = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));

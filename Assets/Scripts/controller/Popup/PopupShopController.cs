@@ -9,6 +9,7 @@ public class PopupShop : MonoBehaviour
     public Button btnShop;
     public Button btnShopExit;
     public Button btnUse;
+    public Button btnBuy;
     public Button btnLeft;
     public Button btnRight;
     public GameObject popupShop;
@@ -16,6 +17,7 @@ public class PopupShop : MonoBehaviour
     private int index;
     private Shop shopDataConfig;
     public Text txtUsing;
+    public Text txtPrice;
     private ShopInfor currentShopInfor;
 
     private void Awake()
@@ -28,6 +30,7 @@ public class PopupShop : MonoBehaviour
     {
         btnShopExit.onClick.AddListener(OnClickBtnShopExit);
         btnUse.onClick.AddListener(OnClickBtnUse);
+        btnBuy.onClick.AddListener(OnClickBtnBuy);
         btnLeft.onClick.AddListener(OnClickBtnLeft);
         btnRight.onClick.AddListener(OnClickBtnRight);
 
@@ -48,6 +51,18 @@ public class PopupShop : MonoBehaviour
     }
     private void Update()
     {
+        CheckBtnNextIsOn();
+        ActiveBtnBuy();
+        if (CheckShipBought())
+        {
+            CheckTxtIsShow();
+        }
+       
+    }
+    
+    private void CheckBtnNextIsOn()
+    {
+
         if (index <= 1)
         {
             btnLeft.gameObject.SetActive(false);
@@ -64,6 +79,9 @@ public class PopupShop : MonoBehaviour
         {
             btnRight.gameObject.SetActive(true);
         }
+    }
+    private void CheckTxtIsShow()
+    {
         if (index == DataAccountPlayer.PlayerInfor.shipPlayerUse)
         {
             txtUsing.text = $"Using";
@@ -73,7 +91,29 @@ public class PopupShop : MonoBehaviour
             txtUsing.text = $"Use";
         }
     }
-    
+    private bool CheckShipBought()
+    {
+        if (DataAccountPlayer.PlayerInfor.listShips.Contains(currentShopInfor.id))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    private void ActiveBtnBuy()
+    {
+        if (DataAccountPlayer.PlayerInfor.listShips.Contains(currentShopInfor.id))
+        {
+            btnBuy.gameObject.SetActive(false);
+        }
+        else
+        {
+            btnBuy.gameObject.SetActive(true);
+            txtPrice.text = $"{currentShopInfor.price}";
+        }
+    }
     private void OnClickBtnShopExit()
     {
         SoundService.Instance.PlaySound(SoundType.sound_click);
@@ -87,6 +127,23 @@ public class PopupShop : MonoBehaviour
         DataAccountPlayer.PlayerInfor.ChangeShipPlayer(currentShopInfor.id);
         
     }
+    private void OnClickBtnBuy()
+    {
+        SoundService.Instance.PlaySound(SoundType.sound_click);
+        if (DataAccountPlayer.PlayerInfor.coinPlayer > currentShopInfor.price)
+        {
+            DataAccountPlayer.PlayerInfor.coinPlayer -= currentShopInfor.price;
+            DataAccountPlayer.PlayerInfor.BoughtShip(currentShopInfor.id);
+            this.PostEvent(EventID.UpdateCoins);
+        }
+        else
+        {
+            Debug.Log($"loi");
+        }
+
+
+    }
+
     private void OnClickBtnLeft()
     {
 

@@ -14,4 +14,5 @@ public struct ShopInfor
 {
     public int id;
     public string image;
+    public int price;
 }
