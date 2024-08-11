@@ -2,18 +2,24 @@ using Core.Pool;
 using Sound;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : SpaceShip
 {
     [SerializeField] public int score = 0;
-    [SerializeField] public static int live = 3;
+    [SerializeField] public int HEALTHMAX = 20;
     private float timeshoot;
     private float TIMESHOOT = 1f;
     public int coins = 0;
 
     private BoxCollider2D box;
     public static int bulletLevel = 1;
+
+
+    public GameObject popupDamage;
+    public TMP_Text popUpText;
 
     public static PlayerController Instance { get; private set; }
 
@@ -25,13 +31,15 @@ public class PlayerController : SpaceShip
         }
         this.RegisterListener(EventID.EnemyDie, (sender, param) => PlayerUpScore());
         box = GetComponent<BoxCollider2D>();
+        hp = HEALTHMAX;
 
     }
     private void Start()
     {
         //StartCoroutine(PlayerFire());
         timeshoot = TIMESHOOT;
-        Debug.Log(live);
+        
+        //Debug.Log(live);
     }
     void Update()
     {
@@ -112,9 +120,9 @@ public class PlayerController : SpaceShip
         DataAccountPlayer.SaveDataPlayerInfor();
         this.PostEvent(EventID.PlayerUpScore);
     }
-    public void AddLive()
+    public void UpHp()
     {
-        live++;
+        hp+=10;
     }
     public void TakeCoin()
     {
@@ -139,8 +147,13 @@ public class PlayerController : SpaceShip
     }
     public override void TakeDamage(int damage)
     {
+        popUpText.text = damage.ToString();
+        
+        SmartPool.Instance.Spawn(popupDamage, gameObject.transform.position, Quaternion.identity);
         base.TakeDamage(damage);
-        if(hp<= 0)
+        this.PostEvent(EventID.WasHitBulelt);
+        
+        if (hp<= 0)
         {
             SpaceShipDie();
             
@@ -148,15 +161,10 @@ public class PlayerController : SpaceShip
     }
     public override void SpaceShipDie()
     {
-        live--;
         base.SpaceShipDie();
-        if (live == 0)
-        {
-            this.PostEvent(EventID.GameOver);
-        }
-
+        this.PostEvent(EventID.GameOver);
         SoundService.Instance.PlaySound(SoundType.sound_player_die);
-        this.PostEvent(EventID.PlayerDie);
+        
         
     }
     private void OnCollisionEnter2D(Collision2D col)
@@ -174,9 +182,9 @@ public class PlayerController : SpaceShip
         
         if (col.gameObject.tag == "enemyShip")
                 {
-                    SpaceShipDie();
                     var temp = col.gameObject.GetComponent<EnemyController>();
                     temp.SpaceShipDie();
+            TakeDamage(5);
                 }
     }
 }   

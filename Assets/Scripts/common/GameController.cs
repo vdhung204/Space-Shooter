@@ -7,6 +7,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+//using UnityEngine.UIElements;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
     public Button btnExit;
     public Button btnResume;
     public GameObject enemy;
+
+    public Slider slider;
 
     //private static bool _isGameover = false;
 
@@ -44,16 +47,15 @@ public class GameController : MonoBehaviour
         btnPause.onClick.AddListener(OnClickBtnPause);
         btnExit.onClick.AddListener(OnClickBtnExit);
         btnResume.onClick.AddListener(OnClickBtnResume);
-        this.RegisterListener(EventID.PlayerDie, (sender, param) =>SpawnPlayer());
+        this.RegisterListener(EventID.WasHitBulelt, (sender, param) => PlayerHpImg());
         this.RegisterListener(EventID.PlayerUpScore, (sender, param) => ShowScorePlayer());
         this.RegisterListener(EventID.GameOver, (sender, param) => EndGame());
-        this.RegisterListener(EventID.AddHP, (sender, param) => PlayerLiveImg());
+        this.RegisterListener(EventID.AddHP, (sender, param) => PlayerHpImg());
         
-
         CheckToSpawnWave();
         SpawnPlayer();
         ShowScorePlayer();
-        PlayerLiveImg();
+        
        
     }
     
@@ -70,20 +72,11 @@ public class GameController : MonoBehaviour
         iconPauseButton.sprite = iconPlay;
         popupPause.SetActive(true);
     }
-    private IEnumerator DelaySpawnPlayer()
-    {
-        yield return new WaitForSeconds(3f);
-
-        //StartCoroutine(SpawnEnemy());
-    }
+    
 
     private void SpawnPlayer()
     {
-        if (PlayerController.live > 0)
-        {
-            StartCoroutine(DelaySpawnPlayer());
-            PlayerLiveImg();
-
+        
             var playerShipIndex = DataAccountPlayer.PlayerInfor.shipPlayerUse;
             var shipUser = shipPlayer[0];
 
@@ -103,8 +96,8 @@ public class GameController : MonoBehaviour
 
             var posPlayer = new Vector3(0f, -2.8f, 0f);
             SmartPool.Instance.Spawn(shipUser, posPlayer, Quaternion.identity);
-            
-        }
+        slider.value = PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
+
     }
 
     private void CheckToSpawnWave()
@@ -132,6 +125,7 @@ public class GameController : MonoBehaviour
     }
     IEnumerator SpawnEnemy()
     {
+        Debug.Log($"enemy");
         yield return new WaitForSeconds(1.5f);
         var pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         var minX = -pos.x;
@@ -180,37 +174,18 @@ public class GameController : MonoBehaviour
         }
         scoretxt.text = $"{PlayerController.Instance.score}";
     }
-    private void PlayerLiveImg()
+    private void PlayerHpImg()
     {
         if (!PlayerController.Instance)
         {
             return;
         }
-        
-        for (int i = 0; i < ships.Length; i++)
-        {   
-            if(PlayerController.live > ships.Length)
-            {
-                PlayerController.live = ships.Length;
-            }
-            if (i < PlayerController.live)
-            {
-                ships[i].enabled = true;
-            }
-            else
-            {
-                ships[i].enabled = false;
-            }
-        }
+        slider.value = PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
     }
     private void OnClickBtnExit()
     {
         SoundService.Instance.PlaySound(SoundType.sound_click);
         EndGame();
-    }
-    private void BackToMainMenu()
-    {
-        SceneManager.LoadScene(SceneName.MainMenu.ToString());
     }
     private void OnClickBtnResume()
     {

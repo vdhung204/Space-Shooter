@@ -8,7 +8,7 @@ public class EnemyController : SpaceShip
 {
     private float timeShoot;
     private float TIMESHOT = 3f;
-
+    public PopupDamage popupDamage;
     
     // Start is called before the first frame update
     void Start()
@@ -58,8 +58,9 @@ public class EnemyController : SpaceShip
     }
     public override void TakeDamage(int damage)
     {
-        base.TakeDamage(damage);   
-        if(hp <= 0)
+        base.TakeDamage(damage);
+        //popupDamage.ShowTakeDamage(damage, this.transform);
+        if (hp <= 0)
         {
             SpaceShipDie();
             this.PostEvent(EventID.EnemyDie);
