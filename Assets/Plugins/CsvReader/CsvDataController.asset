@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - {fileID: 11400000, guid: 4062d56a9f686d34785380871f809af2, type: 2}
+  - {fileID: 11400000, guid: ebd4386129935a540b912f76fc5d074a, type: 2}
   - {fileID: 11400000, guid: cc8bf902612b6f44b80b06a77144dce3, type: 2}
   - {fileID: 11400000, guid: 0cbfa8f3aa589b44896627ca97751c28, type: 2}
-  csvDataName: WaveEnemy
+  csvDataName: LevelEnemy
