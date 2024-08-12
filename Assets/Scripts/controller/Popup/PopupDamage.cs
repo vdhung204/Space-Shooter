@@ -8,10 +8,20 @@ public class PopupDamage : MonoBehaviour
 {
     public GameObject popupDamage;
     public TMP_Text popUpText;
-    
-    public void ShowTakeDamage(int damage, Transform trans)
+    public float timeDestroy;
+
+    private void Update()
+    {
+        timeDestroy -= Time.deltaTime;
+        if(timeDestroy < 0)
+        {
+            SmartPool.Instance.Despawn(gameObject);
+        }
+    }
+
+    public void ShowTakeDamage(int damage)
     {
         popUpText.text = damage.ToString();
-        SmartPool.Instance.Spawn(popupDamage,trans.position, Quaternion.identity);
+        SmartPool.Instance.Spawn(popupDamage,transform.position, Quaternion.identity);
     }
 }

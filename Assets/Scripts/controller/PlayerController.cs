@@ -148,8 +148,7 @@ public class PlayerController : SpaceShip
     public override void TakeDamage(int damage)
     {
         popUpText.text = damage.ToString();
-        
-        SmartPool.Instance.Spawn(popupDamage, gameObject.transform.position, Quaternion.identity);
+        SmartPool.Instance.Spawn(popupDamage, transform.position, Quaternion.identity);
         base.TakeDamage(damage);
         this.PostEvent(EventID.WasHitBulelt);
         

@@ -14,6 +14,8 @@ public class ItemFactory : SingletonMono<ItemFactory>
 
     public static void CheckItem(Transform target)
     {
+        if(target == null)
+            return;
         foreach (BaseItem item in listItems)
         {
             if (Vector3.Distance(target.position, item.transform.position) < 2f)

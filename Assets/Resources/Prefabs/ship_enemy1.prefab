@@ -115,14 +115,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff87d24be6fcdb4a806e5e77b85838c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 1.5
   hp: 5
   bulelt: {fileID: 8047319872047848096, guid: 38accc05fb1e6724985e6d0b25619efe, type: 3}
   shootPos:
   - {fileID: 1812265797828962466}
   levelSpaceShip: 0
   explosion: {fileID: 5364932345472359320, guid: 8e77b1ba21bcfe24c93a6ccafdf58dbe, type: 3}
-  popupDamage: {fileID: -4326964226234364031, guid: b37e77540688906449e412535a588abd, type: 3}
+  popupDamage: {fileID: 496561515603934646, guid: 3747e17c0e8bc5648bab093a7f93aec5, type: 3}
+  tmp_Text: {fileID: 7926007868749318026, guid: 3747e17c0e8bc5648bab093a7f93aec5, type: 3}
 --- !u!50 &2140167190255484929
 Rigidbody2D:
   serializedVersion: 4

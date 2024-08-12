@@ -26,8 +26,6 @@ public class GameController : MonoBehaviour
 
     public Slider slider;
 
-    //private static bool _isGameover = false;
-
     public int wave = 1;
     public int timeSpawn;
     public int countEnemy;
@@ -97,7 +95,6 @@ public class GameController : MonoBehaviour
             var posPlayer = new Vector3(0f, -2.8f, 0f);
             SmartPool.Instance.Spawn(shipUser, posPlayer, Quaternion.identity);
         slider.value = PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
-
     }
 
     private void CheckToSpawnWave()
@@ -125,7 +122,6 @@ public class GameController : MonoBehaviour
     }
     IEnumerator SpawnEnemy()
     {
-        Debug.Log($"enemy");
         yield return new WaitForSeconds(1.5f);
         var pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         var minX = -pos.x;

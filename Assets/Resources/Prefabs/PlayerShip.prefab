@@ -234,8 +234,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: -0.42307693}
-    oldSize: {x: 1.3043479, y: 1.1304348}
-    newSize: {x: 1.3043479, y: 1.1304348}
+    oldSize: {x: 1.0714285, y: 0.9285714}
+    newSize: {x: 1.0714285, y: 0.9285714}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0ac57c90a8a6124ea71b63e2f43fcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2.5
   hp: 0
   bulelt: {fileID: 4696365471233437962, guid: a57d56f50090e424b8c331974ec55abf, type: 3}
   shootPos:
@@ -292,9 +292,8 @@ MonoBehaviour:
   score: 0
   HEALTHMAX: 20
   coins: 0
-  txtTrans: {fileID: 6433376409677451710, guid: a0d0ee04524dd144da6726149cd64c85, type: 3}
-  popupDamage: {fileID: 168154310168842435, guid: b37e77540688906449e412535a588abd, type: 3}
-  popUpText: {fileID: 3313963185505235875, guid: b37e77540688906449e412535a588abd, type: 3}
+  popupDamage: {fileID: 496561515603934646, guid: 3747e17c0e8bc5648bab093a7f93aec5, type: 3}
+  popUpText: {fileID: 7926007868749318026, guid: 3747e17c0e8bc5648bab093a7f93aec5, type: 3}
 --- !u!4 &1817150029052230283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: 0d55a9c4887e44e4aa2acb9e0d6c5310, type: 3}

@@ -245,8 +245,10 @@ MonoBehaviour:
   levelSpaceShip: 0
   explosion: {fileID: 8035061821536892682, guid: 50db101beca5f764a91f03e1d0376cd3, type: 3}
   score: 0
-  live: 3
+  HEALTHMAX: 20
   coins: 0
+  popupDamage: {fileID: 496561515603934646, guid: 3747e17c0e8bc5648bab093a7f93aec5, type: 3}
+  popUpText: {fileID: 7926007868749318026, guid: 3747e17c0e8bc5648bab093a7f93aec5, type: 3}
 --- !u!1 &7595329702909164440
 GameObject:
   m_ObjectHideFlags: 0

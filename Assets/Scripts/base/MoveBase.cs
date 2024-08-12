@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveBase : MonoBehaviour
 {
-    public int speed;
+    public float speed;
 
     public void MoveBaseController(Vector3 direction)
     {

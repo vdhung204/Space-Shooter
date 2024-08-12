@@ -2,14 +2,15 @@ using Core.Pool;
 using Sound;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyController : SpaceShip
 {
     private float timeShoot;
     private float TIMESHOT = 3f;
-    public PopupDamage popupDamage;
-    
+    public GameObject popupDamage;
+    public TMP_Text tmp_Text;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,7 +60,10 @@ public class EnemyController : SpaceShip
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
-        //popupDamage.ShowTakeDamage(damage, this.transform);
+        tmp_Text.text = damage.ToString();
+         SmartPool.Instance.Spawn(popupDamage, transform.position, Quaternion.identity);
+
+
         if (hp <= 0)
         {
             SpaceShipDie();
