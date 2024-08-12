@@ -38,7 +38,7 @@ public class PlayerController : SpaceShip
     {
         //StartCoroutine(PlayerFire());
         timeshoot = TIMESHOOT;
-        
+        bulletLevel = 1;
         //Debug.Log(live);
     }
     void Update()
@@ -147,9 +147,10 @@ public class PlayerController : SpaceShip
     }
     public override void TakeDamage(int damage)
     {
-        popUpText.text = damage.ToString();
-        SmartPool.Instance.Spawn(popupDamage, transform.position, Quaternion.identity);
         base.TakeDamage(damage);
+        popUpText.text =damage.ToString();
+        Instantiate(popupDamage, transform.position, Quaternion.identity);
+        
         this.PostEvent(EventID.WasHitBulelt);
         
         if (hp<= 0)
@@ -172,6 +173,7 @@ public class PlayerController : SpaceShip
         {
             var temp = col.gameObject.GetComponent<BulletController>();
             TakeDamage(temp.damage);
+            
             temp.DestroyBullet();
         }
 
@@ -180,10 +182,10 @@ public class PlayerController : SpaceShip
     {
         
         if (col.gameObject.tag == "enemyShip")
-                {
-                    var temp = col.gameObject.GetComponent<EnemyController>();
+                {TakeDamage(5);
+            var temp = col.gameObject.GetComponent<EnemyController>();
                     temp.SpaceShipDie();
-            TakeDamage(5);
+            
                 }
     }
 }   

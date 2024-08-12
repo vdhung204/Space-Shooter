@@ -11,7 +11,13 @@ public class EnemyController : SpaceShip
     private float TIMESHOT = 3f;
     public GameObject popupDamage;
     public TMP_Text tmp_Text;
-    // Start is called before the first frame update
+
+    private Level_enemy lvlE;
+
+    private void Awake()
+    {
+        lvlE = Resources.Load<Level_enemy>("data_csv/Level_enemy");
+    }
     void Start()
     {
         timeShoot = TIMESHOT;
@@ -28,6 +34,11 @@ public class EnemyController : SpaceShip
 
     }
     
+    public void InitInforEnemy(int level)
+    {
+        var temp = lvlE.GetInforEnemyByLevel(level);
+        SetInforEnemy(temp);
+    }
     public override void Fire()
     {
         if (timeShoot <= 0)
@@ -53,7 +64,7 @@ public class EnemyController : SpaceShip
     {
         base.SpaceShipDie();
         var x = Random.Range(0, 15);
-        ItemFactory.Instance.Create(x,this.transform.position);
+        ItemFactory.Instance.Create(6,this.transform.position);
         SoundService.Instance.PlaySound(SoundType.sound_enemy_die);
 
     }
@@ -61,7 +72,8 @@ public class EnemyController : SpaceShip
     {
         base.TakeDamage(damage);
         tmp_Text.text = damage.ToString();
-         SmartPool.Instance.Spawn(popupDamage, transform.position, Quaternion.identity);
+        Debug.Log(tmp_Text.text);
+        Instantiate(popupDamage, transform.position, Quaternion.identity);
 
 
         if (hp <= 0)
@@ -79,5 +91,10 @@ public class EnemyController : SpaceShip
             temp.DestroyBullet();
         }
         
+    }
+    private void SetInforEnemy(Enemy_Config eCf)
+    {
+        this.hp = eCf.hp;
+        this.speed = eCf.speed;
     }
 }

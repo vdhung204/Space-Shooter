@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7157250626699322967}
   - component: {fileID: 7926007868749318026}
   - component: {fileID: 5881864310068295760}
-  - component: {fileID: -6512016693636815346}
+  - component: {fileID: -1893346840198252768}
   m_Layer: 0
   m_Name: PopupDamage
   m_TagString: Untagged
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -194,7 +194,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-6512016693636815346
+--- !u!114 &-1893346840198252768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,6 +206,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57107abb6d856b344964a77a0d1d0001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupDamage: {fileID: 496561515603934646}
-  popUpText: {fileID: 7926007868749318026}
-  timeDestroy: 1

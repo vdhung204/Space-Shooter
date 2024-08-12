@@ -122,7 +122,7 @@ public class GameController : MonoBehaviour
     }
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         var pos = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0f));
         var minX = -pos.x;
         var maxX = pos.x;
@@ -131,6 +131,7 @@ public class GameController : MonoBehaviour
 
         var posEnemy = new Vector3(temp, maxY, 0f);
         var go = SmartPool.Instance.Spawn(enemy, posEnemy, Quaternion.identity);
+        go.GetComponent<EnemyController>().InitInforEnemy(currentWave);
         go.transform.localScale = new Vector3(2f, 2f, 2f);
 
         countEnemyWave++;
