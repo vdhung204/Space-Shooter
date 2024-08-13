@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
    
     public void OnEnable()
     {
-        SoundService.Instance.PlayBackgroundMusic(SoundType.sound_bg);
+        SoundService.Instance.PlayBackgroundMusic(SoundType.background_gameplay);
     }
 
     private void OnClickBtnPause()

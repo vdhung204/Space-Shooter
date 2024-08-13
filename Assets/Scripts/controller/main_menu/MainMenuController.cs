@@ -32,7 +32,10 @@ public class MainMenuController : MonoBehaviour
         Time.timeScale = 1f ;
     }
 
-    
+    private void OnEnable()
+    {
+        SoundService.Instance.PlayBackgroundMusic(SoundType.background_mainmenu);
+    }
 
     private void OnClickBattle()
     {

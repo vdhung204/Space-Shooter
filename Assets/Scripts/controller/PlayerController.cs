@@ -17,7 +17,6 @@ public class PlayerController : SpaceShip
     private BoxCollider2D box;
     public static int bulletLevel = 1;
 
-
     public GameObject popupDamage;
     public TMP_Text popUpText;
 
@@ -150,6 +149,8 @@ public class PlayerController : SpaceShip
         base.TakeDamage(damage);
         popUpText.text =damage.ToString();
         Instantiate(popupDamage, transform.position, Quaternion.identity);
+        DamageFlash.instance.OnDamageFlash();
+        SoundService.Instance.PlaySound(SoundType.hurt1SFX);
         CamShake.instance.Shake(0.23f, 16, .8f, 17);
         this.PostEvent(EventID.WasHitBulelt);
         

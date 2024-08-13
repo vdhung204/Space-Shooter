@@ -14,6 +14,9 @@ namespace Sound
         sound_enemy_fire =5,
         sound_enemy_die = 6,
         sound_player_die = 7,
+        hurt1SFX  = 8,
+        background_gameplay = 9,
+        background_mainmenu = 10,
     }
 
     public class SoundService : SingletonMono<SoundService>
