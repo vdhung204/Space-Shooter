@@ -150,7 +150,7 @@ public class PlayerController : SpaceShip
         base.TakeDamage(damage);
         popUpText.text =damage.ToString();
         Instantiate(popupDamage, transform.position, Quaternion.identity);
-        
+        CamShake.instance.Shake(0.23f, 16, .8f, 17);
         this.PostEvent(EventID.WasHitBulelt);
         
         if (hp<= 0)

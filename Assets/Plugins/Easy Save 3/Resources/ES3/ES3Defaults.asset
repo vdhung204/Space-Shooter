@@ -30,10 +30,10 @@ MonoBehaviour:
     serializationDepthLimit: 64
     assemblyNames:
     - Assembly-CSharp-firstpass
+    - Assembly-CSharp
     - Cinemachine
     - UniRx
     - PsdPlugin
-    - Assembly-CSharp
     - UniRx.Examples
     - CsvReader
     - Sirenix.OdinInspector.Modules.UnityMathematics
