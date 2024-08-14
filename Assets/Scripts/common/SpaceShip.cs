@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SpaceShip : MoveBase
 {
-    public float hp;
+    public int hp;
     public GameObject bulelt;
     public Transform[] shootPos;
     public int levelSpaceShip;

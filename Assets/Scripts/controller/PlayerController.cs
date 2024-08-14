@@ -13,11 +13,11 @@ public class PlayerController : SpaceShip
     private float timeshoot;
     private float TIMESHOOT = 1f;
     public int coins = 0;
-
     private BoxCollider2D box;
     public static int bulletLevel = 1;
-
+    public GameObject shield;
     public GameObject popupDamage;
+    
     public TMP_Text popUpText;
 
     public static PlayerController Instance { get; private set; }
@@ -38,6 +38,7 @@ public class PlayerController : SpaceShip
         //StartCoroutine(PlayerFire());
         timeshoot = TIMESHOOT;
         bulletLevel = 1;
+        box = GetComponent<BoxCollider2D>();
         //Debug.Log(live);
     }
     void Update()
@@ -136,13 +137,16 @@ public class PlayerController : SpaceShip
     }
     public void Shield()
     {
-        //box.gameObject.SetActive(false);
-        Debug.Log($"Bat tu");
+        box.enabled = false;
+        shield.gameObject.SetActive(true);
+        StartCoroutine(BackToTakeDamage());
     }
     private IEnumerator BackToTakeDamage()
     {
         yield return new WaitForSeconds(5f);
-        box.gameObject.SetActive(true);
+
+        shield.gameObject.SetActive(false);
+        box.enabled = true;
     }
     public override void TakeDamage(int damage)
     {
@@ -183,10 +187,10 @@ public class PlayerController : SpaceShip
     {
         
         if (col.gameObject.tag == "enemyShip")
-                {TakeDamage(5);
-            var temp = col.gameObject.GetComponent<EnemyController>();
-                    temp.SpaceShipDie();
-            
+       {
+            var temp = col.gameObject.GetComponent<EnemyController>();       
+            TakeDamage(temp.hp);
+            temp.SpaceShipDie();
                 }
     }
 }   

@@ -64,7 +64,7 @@ public class EnemyController : SpaceShip
     {
         base.SpaceShipDie();
         var x = Random.Range(0, 15);
-        ItemFactory.Instance.Create(6,this.transform.position);
+        ItemFactory.Instance.Create(x,this.transform.position);
         SoundService.Instance.PlaySound(SoundType.sound_enemy_die);
 
     }
@@ -72,7 +72,6 @@ public class EnemyController : SpaceShip
     {
         base.TakeDamage(damage);
         tmp_Text.text = damage.ToString();
-        Debug.Log(tmp_Text.text);
         Instantiate(popupDamage, transform.position, Quaternion.identity);
 
 
