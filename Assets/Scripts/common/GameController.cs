@@ -7,7 +7,6 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-//using UnityEngine.UIElements;
 
 public class GameController : MonoBehaviour
 {
@@ -50,8 +49,8 @@ public class GameController : MonoBehaviour
         this.RegisterListener(EventID.GameOver, (sender, param) => EndGame());
         this.RegisterListener(EventID.AddHP, (sender, param) => PlayerHpImg());
         
-        CheckToSpawnWave();
         SpawnPlayer();
+        CheckToSpawnWave();
         ShowScorePlayer();
         
        
@@ -94,7 +93,7 @@ public class GameController : MonoBehaviour
 
             var posPlayer = new Vector3(0f, -2.8f, 0f);
             SmartPool.Instance.Spawn(shipUser, posPlayer, Quaternion.identity);
-        slider.value = PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
+            slider.value = PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
     }
 
     private void CheckToSpawnWave()
@@ -177,7 +176,10 @@ public class GameController : MonoBehaviour
         {
             return;
         }
-        slider.value = PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
+         slider.value = (float)PlayerController.Instance.hp / PlayerController.Instance.HEALTHMAX;
+       
+
+
     }
     private void OnClickBtnExit()
     {
