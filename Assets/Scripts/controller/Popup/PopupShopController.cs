@@ -122,9 +122,9 @@ public class PopupShop : MonoBehaviour
     private void OnClickBtnUse()
     {
         SoundService.Instance.PlaySound(SoundType.sound_click);
-        popupShop.SetActive(false);
-
+        
         DataAccountPlayer.PlayerInfor.ChangeShipPlayer(currentShopInfor.id);
+        popupShop.SetActive(false);
         
     }
     private void OnClickBtnBuy()

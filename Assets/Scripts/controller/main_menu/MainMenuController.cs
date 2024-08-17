@@ -40,7 +40,6 @@ public class MainMenuController : MonoBehaviour
     private void OnClickBattle()
     {
         SoundService.Instance.PlaySound(SoundType.sound_click);
-        SceneManager.LoadScene(SceneName.GamePlay.ToString());
     }  
     private void OnClickMenuShop()
     {
